@@ -7,7 +7,10 @@ export default function ProductCard({ product, className }) {
 
   const handleAdd = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     e.stopPropagation();
+=======
+>>>>>>> a64bc9dcffdaa3c66c8d697446bd2361a97b3dca
     addItem(product, product.weights?.[0] ?? null);
   };
 
@@ -32,7 +35,11 @@ export default function ProductCard({ product, className }) {
           <img
             src={imageUrl}
             alt={product.name}
+<<<<<<< HEAD
             className="object-contain w-full"
+=======
+            className="object-contain w-full p-1"
+>>>>>>> a64bc9dcffdaa3c66c8d697446bd2361a97b3dca
             onError={(e) => {
               e.currentTarget.style.display = "none";
             }}
@@ -64,10 +71,14 @@ export default function ProductCard({ product, className }) {
       {/* Weight selector */}
       {product.weights?.length > 0 && (
         <select
+<<<<<<< HEAD
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
           }}
+=======
+          onClick={(e) => e.preventDefault()}
+>>>>>>> a64bc9dcffdaa3c66c8d697446bd2361a97b3dca
           className="px-2 py-1 mt-2 text-xs text-gray-600 bg-white border border-gray-200 rounded outline-none cursor-pointer focus:border-orange-400"
         >
           {product.weights.map((w) => (
@@ -79,7 +90,17 @@ export default function ProductCard({ product, className }) {
       {/* Price */}
       <div className="flex items-baseline gap-2 mt-2">
         <span
+<<<<<<< HEAD
           className={`text-[16px] font-bold ${product.old_price && product.old_price > product.price ? "text-[#FE9015]" : "text-gray-900"}`}
+=======
+          className="text-[16px] font-bold"
+          style={{
+            color:
+              product.old_price && product.old_price > product.price
+                ? "#FE9015"
+                : "#111",
+          }}
+>>>>>>> a64bc9dcffdaa3c66c8d697446bd2361a97b3dca
         >
           {Number(product.price).toLocaleString()} Р
         </span>
@@ -90,7 +111,11 @@ export default function ProductCard({ product, className }) {
         )}
       </div>
 
+<<<<<<< HEAD
       {/* Add to cart */}
+=======
+      {/* Add to cart button */}
+>>>>>>> a64bc9dcffdaa3c66c8d697446bd2361a97b3dca
       <button
         onClick={handleAdd}
         className="w-full mt-2 text-sm font-medium text-white transition-all bg-orange-500 border-none cursor-pointer h-9 hover:bg-orange-600 active:scale-95"
@@ -100,10 +125,14 @@ export default function ProductCard({ product, className }) {
 
       {/* One click */}
       <button
+<<<<<<< HEAD
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
         }}
+=======
+        onClick={(e) => e.preventDefault()}
+>>>>>>> a64bc9dcffdaa3c66c8d697446bd2361a97b3dca
         className="mt-1 text-xs text-center text-orange-500 bg-transparent border-none cursor-pointer hover:text-orange-600"
       >
         Купить в 1 клик
