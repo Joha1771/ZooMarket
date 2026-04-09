@@ -1,40 +1,100 @@
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { useState } from "react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 import catImage from "../../assets/cat.png";
+import leftArrow from "../../assets/icons/left-hero-arrow.svg";
+import rightArrow from "../../assets/icons/right-hero-arrow.svg";
+import heroBtnArrow from "../../assets/icons/hero-btn-arrow.svg";
 
-function HeroText() {
-  return (
-    <div className="flex flex-col items-start gap-4 max-w-sm z-10">
-      <h1 className="text-3xl md:text-4xl font-extrabold text-white leading-tight">
-        Лохматость сильно повысится!
-      </h1>
-      <p className="text-white/90 text-base leading-relaxed">
-        Скидка 20% на все шампуни для котеек.
-      </p>
-      <button className="mt-2 px-6 py-3 bg-white text-gray-800 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200 cursor-pointer border-none text-sm flex items-center gap-2">
-        Смотреть шампуни →
-      </button>
-    </div>
-  );
-}
+const slides = [
+  {
+    id: 1,
+    title: "Лохматость сильно повысится!",
+    subtitle: "Скидка 20% на все шампуни для котеек.",
+    btnText: "Смотреть шампуни",
+    image: catImage,
+  },
+  {
+    id: 2,
+    title: "Всё для вашего питомца",
+    subtitle: "Корма, игрушки, аксессуары с доставкой по городу.",
+    btnText: "Перейти в каталог",
+    image: catImage,
+  },
+];
 
-function HeroImage() {
-  return (
-    <div className="absolute right-8 bottom-0 h-[110%] flex items-end">
-      <img src={catImage} alt="Кот" className="h-full w-auto object-contain" />
-    </div>
-  );
-}
+export default function Hero() {
+  const [activeIndex, setActiveIndex] = useState(0);
 
-function Hero() {
   return (
-    <section className="bg-gray-50 py-8 px-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="relative bg-orange-400 rounded-2xl overflow-hidden px-12 py-14 flex items-center min-h-[280px]">
-          <HeroText />
-          <HeroImage />
+    <section className="py-4 bg-white ">
+      <div className="max-w-[1170px] mx-auto px-5">
+        {/* Внешний контейнер: pt-14 даёт место коту сверху */}
+        <div className="relative pt-14">
+          {/* Swiper — скруглён, обрезает содержимое */}
+          <Swiper
+            modules={[Autoplay, Pagination, Navigation]}
+            autoplay={{ delay: 4000, disableOnInteraction: false }}
+            pagination={{ clickable: true }}
+            navigation={{ prevEl: ".hero-prev", nextEl: ".hero-next" }}
+            onSlideChange={(s) => setActiveIndex(s.realIndex)}
+            loop
+            className="rounded-2xl overflow-hidden h-[340px]"
+          >
+            {slides.map((slide) => (
+              <SwiperSlide key={slide.id}>
+                <div className="flex items-center h-full bg-[#F5A623]">
+                  <div className="relative z-10 flex flex-col gap-3 pl-14 max-w-[420px]">
+                    <h1 className="text-[36px] font-extrabold leading-tight text-white">
+                      {slide.title}
+                    </h1>
+                    <p className="text-[15px] text-white/90 leading-relaxed">
+                      {slide.subtitle}
+                    </p>
+                    <button className="mt-2 w-fit flex items-center gap-2 px-5 py-3 bg-white text-[#FE9015] text-sm font-medium rounded-lg border-none cursor-pointer hover:bg-gray-50 transition-colors">
+                      {slide.btnText}
+                      <img src={heroBtnArrow} alt="" className="w-4 h-3" />
+                    </button>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* Кот — absolute внутри внешнего контейнера, не внутри Swiper */}
+          <img
+            src={slides[activeIndex]?.image || slides[0].image}
+            alt="Питомец"
+            className="absolute bottom-0 z-10 object-contain object-bottom pointer-events-none top-5 w-120 right-6"
+          />
+
+          {/* Стрелки — по центру слайдера (не всего контейнера) */}
+          <button className="hero-prev absolute left-6 top-[calc(50%+28px)] -translate-y-1/2 z-20 border-none bg-transparent cursor-pointer p-0">
+            <img src={leftArrow} alt="Назад" className="w-6 h-9" />
+          </button>
+          <button className="hero-next absolute right-6 top-[calc(50%+28px)] -translate-y-1/2 z-20 border-none bg-transparent cursor-pointer p-0">
+            <img src={rightArrow} alt="Вперёд" className="w-6 h-9" />
+          </button>
         </div>
       </div>
+
+      <style>{`
+        .swiper-pagination-bullet {
+          background: rgba(255,255,255,0.5) !important;
+          opacity: 1 !important;
+          width: 8px !important;
+          height: 8px !important;
+        }
+        .swiper-pagination-bullet-active {
+          background: #fff !important;
+        }
+        .swiper-pagination {
+          bottom: 14px !important;
+        }
+      `}</style>
     </section>
   );
 }
-
-export default Hero;
