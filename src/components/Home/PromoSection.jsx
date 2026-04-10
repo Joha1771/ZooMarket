@@ -38,11 +38,7 @@ export default function PromoSection() {
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-xl font-bold text-gray-900">Акции</h2>
           <Link
-<<<<<<< HEAD
-            to="/catalog/all"
-=======
             to="/catalog"
->>>>>>> a64bc9dcffdaa3c66c8d697446bd2361a97b3dca
             className="flex items-center gap-1.5 text-sm no-underline hover:opacity-80 transition-opacity"
             style={{ color: "#FE9015" }}
           >

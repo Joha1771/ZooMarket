@@ -28,7 +28,6 @@ export const getProductsByCategory = (category) =>
     `/products?category=eq.${encodeURIComponent(category)}&select=*&order=created_at.desc`,
   );
 
-<<<<<<< HEAD
 // Фильтрованный запрос для CatalogPage
 export const getFilteredProducts = ({
   category,
@@ -64,8 +63,6 @@ export const getFilteredProducts = ({
   return api.get(`/products?${params}`);
 };
 
-=======
->>>>>>> a64bc9dcffdaa3c66c8d697446bd2361a97b3dca
 export const getHitProducts = () =>
   api.get(`/products?is_hit=eq.true&select=*&limit=10`);
 
