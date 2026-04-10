@@ -1,7 +1,15 @@
-import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import RootLayout from "./layouts/RootLayout";
+import HomePage from "./pages/HomePage";
 
-const App = () => {
-  return <div className="bg-black"> Tailwind работает!</div>;
-};
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [{ index: true, element: <HomePage /> }],
+  },
+]);
 
-export default App;
+export default function App() {
+  return <RouterProvider router={router} />;
+}
