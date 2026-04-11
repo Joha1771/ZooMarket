@@ -1,13 +1,21 @@
-import Navbar from "../components/Navbar/Navbar";
 import Hero from "../components/Hero/Hero";
+import PromoSection from "../components/Home/PromoSection";
+import VetClinicBanner from "../components/Home/VetClinicBanner";
+import HitsSection from "../components/Home/HitSection";
+import ArticlesSection from "../components/Home/ArticleSection";
+import BrandsSection from "../components/Home/BrandsSection";
+import SeoText from "../components/Home/SeoText";
 
-function HomePage() {
+export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
+    <div>
       <Hero />
+      <PromoSection />
+      <VetClinicBanner />
+      <HitsSection />
+      <ArticlesSection />
+      <BrandsSection />
+      <SeoText />
     </div>
   );
 }
-
-export default HomePage;
