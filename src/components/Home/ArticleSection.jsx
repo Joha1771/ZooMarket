@@ -32,19 +32,18 @@ function ArticleCard({ article }) {
   return (
     <Link
       to={`/articles/${article.slug}`}
-      className="flex flex-col no-underline border border-gray-200 group"
+      className="flex flex-col no-underline border border-gray-200 group hover:border-orange-200 hover:shadow-md transition-all duration-200"
     >
-      {/* Изображение — без скругления */}
       <div className="overflow-hidden">
         <img
           src={article.image}
           alt={article.title}
-          className="object-cover w-full transition-transform duration-300 h-52 group-hover:scale-105"
+          className="object-cover w-full h-52 transition-transform duration-300 group-hover:scale-105"
         />
       </div>
       <div className="flex flex-col gap-2 p-4">
         <p className="text-xs text-gray-400">{article.date}</p>
-        <h3 className="text-sm font-medium leading-snug text-gray-800 transition-colors group-hover:text-orange-500">
+        <h3 className="text-sm font-medium leading-snug text-gray-800 transition-colors duration-150 group-hover:text-orange-500">
           {article.title}
         </h3>
       </div>
@@ -54,7 +53,7 @@ function ArticleCard({ article }) {
 
 export default function ArticlesSection() {
   return (
-    <section className="py-8">
+    <section className="py-8" id="article">
       <div className="max-w-[1170px] mx-auto px-5">
         <SectionHeader title="Интересные статьи" to="/articles" />
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">

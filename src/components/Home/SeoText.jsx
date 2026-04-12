@@ -1,6 +1,6 @@
 export default function SeoText() {
   return (
-    <section className="py-8 bg-white">
+    <section className="py-8 bg-white" id="seo">
       <div className="max-w-[1170px] mx-auto px-5">
         <h2 className="mb-3 text-base font-bold text-gray-800">
           Интернет-зоомагазин "Сытая Морда" в г. Тюмень

@@ -71,13 +71,24 @@ const sortOptions = [
   { value: "new", label: "Новинки" },
 ];
 
-const quickFiltersList = [
-  "Влажный",
-  "Сухой",
-  "Холистик",
-  "При аллергии",
-  "Котятам",
-];
+// Quick-фильтры по категориям navbar
+const QUICK_FILTERS_BY_CATEGORY = {
+  cats: ["Влажный", "Сухой", "Холистик", "При аллергии", "Котятам"],
+  dogs: ["Влажный", "Сухой", "Холистик", "При аллергии", "Щенкам"],
+  rodents: ["Хомяки", "Кролики", "Морские свинки", "Шиншиллы"],
+  birds: ["Попугаи", "Канарейки", "Корм", "Клетки"],
+  aquarium: ["Корм", "Оборудование", "Декор", "Химия"],
+  all: ["Влажный", "Сухой", "Холистик", "При аллергии", "Котятам"],
+};
+
+// Маппинг категорий slug → русское название для Supabase
+const CATEGORY_MAP = {
+  cats: "Кошки",
+  dogs: "Собаки",
+  rodents: "Грызуны",
+  birds: "Птицы",
+  aquarium: "Аквариумистика",
+};
 
 function FilterGroup({ group, selected, onChange }) {
   const [open, setOpen] = useState(true);
@@ -127,7 +138,6 @@ export default function CatalogPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  // Состояние фильтров
   const [priceFrom, setPriceFrom] = useState("0");
   const [priceTo, setPriceTo] = useState("99999");
   const [priceFromInput, setPriceFromInput] = useState("");
@@ -140,19 +150,28 @@ export default function CatalogPage() {
   });
   const [sort, setSort] = useState("popular");
   const [sortOpen, setSortOpen] = useState(false);
-  const [quickActive, setQuickActive] = useState([]);
-  const [page, setPage] = useState(1);
 
-  // Данные
+  // ── quickActive теперь хранит одно значение (toggle), не массив
+  const [quickActive, setQuickActive] = useState(null);
+
+  const [page, setPage] = useState(1);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const q = searchParams.get("q") || "";
 
-  // Загрузка при изменении фильтров
+  // Quick-фильтры для текущей категории
+  const quickFiltersList =
+    QUICK_FILTERS_BY_CATEGORY[category] || QUICK_FILTERS_BY_CATEGORY["all"];
+
   const fetchProducts = useCallback(() => {
     setLoading(true);
+
+    // Переводим slug → русское название для Supabase
+    const categoryRu = CATEGORY_MAP[category] || null;
+
     getFilteredProducts({
-      category: category === "all" ? null : category,
+      category: categoryRu,
+      quickFilter: quickActive || undefined, // ← передаём активный quick-фильтр
       priceFrom: priceFrom || undefined,
       priceTo: priceTo || undefined,
       subcategory: filters.subcategory || undefined,
@@ -168,20 +187,23 @@ export default function CatalogPage() {
       })
       .catch((err) => console.error("CatalogPage fetch error:", err))
       .finally(() => setLoading(false));
-  }, [category, priceFrom, priceTo, filters, sort, q]);
+  }, [category, priceFrom, priceTo, filters, sort, q, quickActive]); // ← добавили quickActive
 
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
 
-  // Пагинация
+  // Сбрасываем quick-фильтр при смене категории
+  useEffect(() => {
+    setQuickActive(null);
+  }, [category]);
+
   const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
   const paginated = products.slice(
     (page - 1) * ITEMS_PER_PAGE,
     page * ITEMS_PER_PAGE,
   );
 
-  // Активные теги фильтров
   const activeTags = Object.entries(filters)
     .filter(([, v]) => v)
     .map(([k, v]) => ({ key: k, label: v }));
@@ -192,7 +214,7 @@ export default function CatalogPage() {
     setPriceTo("99999");
     setPriceFromInput("");
     setPriceToInput("");
-    setQuickActive([]);
+    setQuickActive(null); // ← сбрасываем и quick-фильтр
   };
 
   const categoryTitle =
@@ -202,7 +224,7 @@ export default function CatalogPage() {
         ? "Корм для кошек"
         : category === "dogs"
           ? "Корм для собак"
-          : category;
+          : CATEGORY_MAP[category] || category;
 
   const currentSortLabel = sortOptions.find((s) => s.value === sort)?.label;
 
@@ -228,18 +250,17 @@ export default function CatalogPage() {
 
       {/* Top filters bar */}
       <div className="flex flex-wrap items-center gap-2 mb-3">
-        {/* Часто ищут */}
         <span className="text-xs text-gray-400">Часто ищут:</span>
+
         {quickFiltersList.map((f) => (
           <button
             key={f}
             onClick={() =>
-              setQuickActive((prev) =>
-                prev.includes(f) ? prev.filter((x) => x !== f) : [...prev, f],
-              )
+              // toggle: повторный клик снимает фильтр
+              setQuickActive((prev) => (prev === f ? null : f))
             }
             className={`h-7 px-3 text-xs rounded border cursor-pointer transition-colors ${
-              quickActive.includes(f)
+              quickActive === f
                 ? "border-orange-400 bg-orange-50 text-orange-500"
                 : "border-gray-200 text-gray-600 hover:border-orange-300 bg-white"
             }`}
@@ -281,8 +302,18 @@ export default function CatalogPage() {
       </div>
 
       {/* Активные теги */}
-      {activeTags.length > 0 && (
+      {(activeTags.length > 0 || quickActive) && (
         <div className="flex flex-wrap items-center gap-2 mb-3">
+          {/* Тег активного quick-фильтра */}
+          {quickActive && (
+            <button
+              onClick={() => setQuickActive(null)}
+              className="flex items-center gap-1 px-3 text-xs text-orange-500 transition-colors border border-orange-300 rounded cursor-pointer h-7 bg-orange-50 hover:bg-orange-100"
+            >
+              {quickActive}
+              <X size={11} />
+            </button>
+          )}
           {activeTags.map((t) => (
             <button
               key={t.key}
@@ -305,7 +336,6 @@ export default function CatalogPage() {
       <div className="flex gap-6">
         {/* Sidebar */}
         <aside className="flex-shrink-0 hidden w-52 lg:block">
-          {/* Цена */}
           <div className="mb-5">
             <p className="mb-2 text-sm font-semibold text-gray-800">Цена</p>
             <div className="flex items-center gap-2">
@@ -330,7 +360,6 @@ export default function CatalogPage() {
             </div>
           </div>
 
-          {/* Фильтры */}
           {filterGroups.map((g) => (
             <FilterGroup
               key={g.id}
@@ -372,7 +401,6 @@ export default function CatalogPage() {
                 ))}
               </div>
 
-              {/* Pagination */}
               {totalPages > 1 && (
                 <div className="flex items-center justify-center gap-1 mt-8">
                   <button

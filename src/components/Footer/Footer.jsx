@@ -21,7 +21,7 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="mt-12 bg-white border-t border-gray-100">
+    <footer id="footer" className="mt-12 bg-white border-t border-gray-100">
       {/* Email subscription + socials */}
       <div className="border-b border-gray-100">
         <div className="max-w-[1170px] mx-auto px-5 py-6 flex items-center gap-6">
@@ -54,13 +54,9 @@ export default function Footer() {
             </a>
             <a
               href="#"
-              className="flex items-center justify-center transition-colors bg-orange-500 rounded-full cursor-pointer w-9 h-9 hover:bg-orange-600"
+              className="flex items-center justify-center transition-colors border border-gray-200 rounded-full cursor-pointer w-9 h-9 hover:border-orange-400"
             >
-              <img
-                src={instagramSvg}
-                alt="Instagram"
-                className="w-full h-full"
-              />
+              <img src={instagramSvg} alt="Instagram" className="w-6 h-full" />
             </a>
           </div>
         </div>

@@ -4,13 +4,12 @@ import heroBtnArrow from "../../assets/icons/hero-btn-arrow.svg";
 
 export default function VetClinicBanner() {
   return (
-    <section className="py-4 pt-20">
+    <section className="py-4 pt-20" id="vetClinic">
       <div className="max-w-[1050px] mx-auto px-5">
         <div
-          className="relative rounded-2xl px-14 py-10 flex items-center min-h-[360px]"
+          className="relative rounded-2xl px-14 py-10 flex items-center min-h-[360px] transition-shadow duration-300 hover:shadow-xl"
           style={{ backgroundColor: "#F5A623", overflow: "visible" }}
         >
-          {/* Текст слева */}
           <div className="z-10 max-w-sm">
             <h2 className="mb-2 text-[28px] font-extrabold text-white leading-tight">
               Мы открыли собственную ветклинику
@@ -20,18 +19,22 @@ export default function VetClinicBanner() {
             </p>
             <Link
               to="/vetclinic"
-              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium no-underline transition-colors bg-white rounded-lg hover:bg-gray-50"
+              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium no-underline bg-white rounded-lg hover:bg-orange-50 hover:shadow-md active:scale-95 transition-all duration-150"
               style={{ color: "#FE9015" }}
             >
               На сайт ветклиники
-              <img src={heroBtnArrow} alt="" className="w-4 h-3" />
+              <img
+                src={heroBtnArrow}
+                alt=""
+                className="w-4 h-3 transition-transform duration-150 group-hover:translate-x-1"
+              />
             </Link>
           </div>
 
-          {/* Изображение — выпирает сверху */}
           <img
             src={clinicImage}
             alt="Ветклиника"
+            className="transition-transform duration-300 hover:scale-105"
             style={{
               position: "absolute",
               right: "1px",

@@ -18,21 +18,24 @@ const brands = [
 
 export default function BrandsSection() {
   return (
-    <section className="py-8">
+    <section className="py-8" id="brands">
       <div className="max-w-[1170px] mx-auto px-5">
         <SectionHeader title="Популярные бренды" />
         <div className="flex items-stretch">
           {brands.map((b) => (
             <div
               key={b.id}
-              className="flex items-center justify-center cursor-pointer hover:border-orange-400"
+              className="flex items-center justify-center cursor-pointer border border-transparent hover:border-orange-300 hover:shadow-sm transition-all duration-200 p-3 rounded"
             >
-              <img src={b.icon} alt={b.name} className="" />
+              <img
+                src={b.icon}
+                alt={b.name}
+                className="transition-transform duration-200 hover:scale-105"
+              />
             </div>
           ))}
-          {/* Стрелка — такая же как в карточках */}
           <div className="flex items-center justify-center flex-shrink-0 ml-3">
-            <button className="p-0 bg-transparent border-none cursor-pointer">
+            <button className="p-0 bg-transparent border-none cursor-pointer hover:opacity-70 transition-opacity duration-150">
               <img src={cardsRightArrow} alt="Ещё" className="w-10 h-10" />
             </button>
           </div>

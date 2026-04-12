@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -9,8 +8,6 @@ import cardsRightArrow from "../../assets/icons/cards-right arrow.svg";
 
 export default function PromoSection() {
   const { products, loading } = usePromoProducts();
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
 
   if (loading) {
     return (
@@ -32,13 +29,13 @@ export default function PromoSection() {
   if (!products.length) return null;
 
   return (
-    <section className="py-8">
+    <section className="py-8" id="promo">
       <div className="max-w-[1170px] mx-auto px-5">
         {/* Header */}
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-xl font-bold text-gray-900">Акции</h2>
           <Link
-            to="/catalog"
+            to="/catalog/all"
             className="flex items-center gap-1.5 text-sm no-underline hover:opacity-80 transition-opacity"
             style={{ color: "#FE9015" }}
           >
@@ -51,11 +48,7 @@ export default function PromoSection() {
         <div className="relative">
           <Swiper
             modules={[Navigation]}
-            navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
-            onBeforeInit={(swiper) => {
-              swiper.params.navigation.prevEl = prevRef.current;
-              swiper.params.navigation.nextEl = nextRef.current;
-            }}
+            navigation={{ prevEl: ".promo-prev", nextEl: ".promo-next" }}
             slidesPerView={5}
             spaceBetween={0}
             breakpoints={{
@@ -73,10 +66,7 @@ export default function PromoSection() {
           </Swiper>
 
           {/* Кастомные оранжевые стрелки */}
-          <button
-            ref={prevRef}
-            className="absolute left-0 z-10 p-0 -translate-x-full -translate-y-1/2 bg-transparent border-none cursor-pointer top-1/2"
-          >
+          <button className="promo-prev absolute left-0 z-10 p-0 -translate-x-full -translate-y-1/2 bg-transparent border-none cursor-pointer top-1/2">
             <img
               src={cardsRightArrow}
               alt="Назад"
@@ -84,10 +74,7 @@ export default function PromoSection() {
               style={{ transform: "rotate(180deg)" }}
             />
           </button>
-          <button
-            ref={nextRef}
-            className="absolute right-0 z-10 p-0 translate-x-full -translate-y-1/2 bg-transparent border-none cursor-pointer top-1/2"
-          >
+          <button className="promo-next absolute right-0 z-10 p-0 translate-x-full -translate-y-1/2 bg-transparent border-none cursor-pointer top-1/2">
             <img src={cardsRightArrow} alt="Вперёд" className="w-10 h-10" />
           </button>
         </div>

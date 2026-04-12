@@ -27,7 +27,7 @@ const slides = [
 
 export default function Hero() {
   return (
-    <section className="py-4 bg-white">
+    <section className="py-4 bg-white" id="hero">
       <div className="max-w-[1170px] mx-auto px-5 relative">
         <Swiper
           modules={[Autoplay, Pagination, Navigation]}

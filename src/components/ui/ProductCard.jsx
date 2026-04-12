@@ -17,7 +17,7 @@ export default function ProductCard({ product, className }) {
     <Link
       to={`/product/${product.id}`}
       className={cn(
-        "group bg-white border border-gray-200 flex flex-col p-3 hover:shadow-md transition-shadow no-underline",
+        "group bg-white border border-gray-200 flex flex-col p-3 no-underline hover:shadow-lg hover:border-orange-200 transition-all duration-200",
         className,
       )}
     >
@@ -32,7 +32,7 @@ export default function ProductCard({ product, className }) {
           <img
             src={imageUrl}
             alt={product.name}
-            className="object-contain w-full"
+            className="object-contain w-full transition-transform duration-300 group-hover:scale-105"
             onError={(e) => {
               e.currentTarget.style.display = "none";
             }}
@@ -57,7 +57,7 @@ export default function ProductCard({ product, className }) {
       </div>
 
       {/* Name */}
-      <p className="flex-1 text-[12px] leading-snug text-gray-700 line-clamp-3 min-h-[48px] mt-2">
+      <p className="flex-1 text-[12px] leading-snug text-gray-700 line-clamp-3 min-h-[48px] mt-2 group-hover:text-gray-900 transition-colors duration-200">
         {product.name}
       </p>
 
@@ -68,7 +68,7 @@ export default function ProductCard({ product, className }) {
             e.preventDefault();
             e.stopPropagation();
           }}
-          className="px-2 py-1 mt-2 text-xs text-gray-600 bg-white border border-gray-200 rounded outline-none cursor-pointer focus:border-orange-400"
+          className="px-2 py-1 mt-2 text-xs text-gray-600 bg-white border border-gray-200 rounded outline-none cursor-pointer hover:border-orange-400 focus:border-orange-400 transition-colors duration-150"
         >
           {product.weights.map((w) => (
             <option key={w}>{w}</option>
@@ -79,7 +79,7 @@ export default function ProductCard({ product, className }) {
       {/* Price */}
       <div className="flex items-baseline gap-2 mt-2">
         <span
-          className={`text-[16px] font-bold ${product.old_price && product.old_price > product.price ? "text-[#FE9015]" : "text-gray-900"}`}
+          className={`text-[16px] font-bold transition-colors duration-150 ${product.old_price && product.old_price > product.price ? "text-[#FE9015]" : "text-gray-900"}`}
         >
           {Number(product.price).toLocaleString()} Р
         </span>
@@ -93,7 +93,7 @@ export default function ProductCard({ product, className }) {
       {/* Add to cart */}
       <button
         onClick={handleAdd}
-        className="w-full mt-2 text-sm font-medium text-white transition-all bg-orange-500 border-none cursor-pointer h-9 hover:bg-orange-600 active:scale-95"
+        className="w-full mt-2 text-sm font-medium text-white bg-orange-500 border-none cursor-pointer h-9 hover:bg-orange-600 active:scale-95 transition-all duration-150"
       >
         В корзину
       </button>
@@ -104,7 +104,7 @@ export default function ProductCard({ product, className }) {
           e.preventDefault();
           e.stopPropagation();
         }}
-        className="mt-1 text-xs text-center text-orange-500 bg-transparent border-none cursor-pointer hover:text-orange-600"
+        className="mt-1 text-xs text-center text-orange-500 bg-transparent border-none cursor-pointer hover:text-orange-700 transition-colors duration-150"
       >
         Купить в 1 клик
       </button>

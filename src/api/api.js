@@ -24,13 +24,60 @@ export const getProducts = (params = {}) => {
 export const getProductById = (id) => api.get(`/products?id=eq.${id}&select=*`);
 
 export const getProductsByCategory = (category) =>
-  api.get(
-    `/products?category=eq.${encodeURIComponent(category)}&select=*&order=created_at.desc`,
-  );
+  api.get(`/products?category=eq.${category}&select=*&order=created_at.desc`);
 
-// Фильтрованный запрос для CatalogPage
+// ─── QUICK-ФИЛЬТРЫ ───────────────────────────────────────────
+const QUICK_FILTERS = {
+  Кошки: {
+    Влажный: { nameKeywords: ["влажный", "кусочки", "паштет", "желе"] },
+    Сухой: { nameKeywords: ["сухой"] },
+    Холистик: {
+      nameKeywords: ["беззерновой", "холистик"],
+      brands: ["ACANA", "Orijen", "Grandorf"],
+    },
+    "При аллергии": { nameKeywords: ["гипоаллерген", "sensitive"] },
+    Котятам: { nameKeywords: ["котят", "kitten"] },
+  },
+  Собаки: {
+    Влажный: { nameKeywords: ["влажный", "кусочки", "паштет"] },
+    Сухой: { nameKeywords: ["сухой"] },
+    Холистик: {
+      nameKeywords: ["беззерновой", "холистик"],
+      brands: ["ACANA", "Orijen"],
+    },
+    Щенкам: { nameKeywords: ["щенк", "puppy", "junior"] },
+    "При аллергии": { nameKeywords: ["гипоаллерген", "sensitive"] },
+  },
+  Грызуны: {
+    Хомяки: { nameKeywords: ["хомяк"] },
+    Кролики: { nameKeywords: ["кролик"] },
+    "Морские свинки": { nameKeywords: ["свинк"] },
+    Шиншиллы: { nameKeywords: ["шиншилл"] },
+  },
+  Птицы: {
+    Попугаи: { nameKeywords: ["попугай"] },
+    Канарейки: { nameKeywords: ["канарейк"] },
+    Корм: { subcategory: "Корм" },
+    Клетки: { nameKeywords: ["клетк"] },
+  },
+  Аквариумистика: {
+    Корм: { subcategory: "Корм" },
+    Оборудование: { subcategory: "Оборудование" },
+    Декор: { subcategory: "Декор" },
+    Химия: { subcategory: "Химия" },
+  },
+  Ветаптека: {
+    Витамины: { subcategory: "Витамины" },
+    "От блох": { nameKeywords: ["блох"] },
+    "От глистов": { nameKeywords: ["глист", "гельминт"] },
+    Антисептики: { subcategory: "Антисептики" },
+  },
+};
+
+// ─── ОСНОВНАЯ ФУНКЦИЯ ФИЛЬТРАЦИИ ─────────────────────────────
 export const getFilteredProducts = ({
   category,
+  quickFilter,
   priceFrom,
   priceTo,
   subcategory,
@@ -40,27 +87,54 @@ export const getFilteredProducts = ({
   sort,
   q,
 } = {}) => {
-  const params = new URLSearchParams({ select: "*" });
+  // Строим URL вручную — НЕ через URLSearchParams
+  // чтобы кириллица не кодировалась дважды
+  const parts = ["select=*"];
 
-  if (category && category !== "all")
-    params.append("category", `eq.${category}`);
-  if (priceFrom) params.append("price", `gte.${priceFrom}`);
-  if (priceTo) params.append("price", `lte.${priceTo}`);
-  if (subcategory) params.append("subcategory", `eq.${subcategory}`);
-  if (age) params.append("age", `eq.${age}`);
-  if (purpose) params.append("purpose", `eq.${purpose}`);
-  if (brand) params.append("brand", `eq.${brand}`);
-  if (q) params.append("name", `ilike.*${q}*`);
+  if (category && category !== "all") {
+    parts.push(`category=eq.${category}`);
+  }
 
+  if (priceFrom && priceFrom !== "0") parts.push(`price=gte.${priceFrom}`);
+  if (priceTo && priceTo !== "99999") parts.push(`price=lte.${priceTo}`);
+
+  if (subcategory) parts.push(`subcategory=eq.${subcategory}`);
+  if (age) parts.push(`age=eq.${age}`);
+  if (purpose) parts.push(`purpose=eq.${purpose}`);
+  if (brand) parts.push(`brand=eq.${brand}`);
+  if (q) parts.push(`name=ilike.*${q}*`);
+
+  // ── Quick-фильтр ─────────────────────────────────────────
+  if (quickFilter && category && QUICK_FILTERS[category]?.[quickFilter]) {
+    const f = QUICK_FILTERS[category][quickFilter];
+
+    if (f.subcategory && !subcategory) {
+      parts.push(`subcategory=eq.${f.subcategory}`);
+    }
+
+    if (f.brands?.length) {
+      parts.push(`brand=in.(${f.brands.join(",")})`);
+    }
+
+    if (f.nameKeywords?.length) {
+      const orParts = f.nameKeywords
+        .map((kw) => `name.ilike.*${kw}*`)
+        .join(",");
+      parts.push(`or=(${orParts})`);
+    }
+  }
+
+  // ── Сортировка ───────────────────────────────────────────
   const sortMap = {
-    popular: "is_hit.desc",
+    popular: "is_hit.desc,stock_quantity.desc",
     price_asc: "price.asc",
     price_desc: "price.desc",
+    discount: "discount.desc",
     new: "created_at.desc",
   };
-  params.append("order", sortMap[sort] || "created_at.desc");
+  parts.push(`order=${sortMap[sort] || "is_hit.desc"}`);
 
-  return api.get(`/products?${params}`);
+  return api.get(`/products?${parts.join("&")}`);
 };
 
 export const getHitProducts = () =>
