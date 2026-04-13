@@ -114,7 +114,9 @@ function FilterGroup({ group, selected, onChange }) {
                 onChange={() => onChange(selected === opt ? null : opt)}
                 className="w-4 h-4 cursor-pointer accent-orange-500"
               />
-              <span className="text-xs text-gray-600">{opt}</span>
+              <span className="text-xs text-gray-600 dark:text-gray-400">
+                {opt}
+              </span>
             </label>
           ))}
           {group.options.length > 6 && (
@@ -229,7 +231,7 @@ export default function CatalogPage() {
   const currentSortLabel = sortOptions.find((s) => s.value === sort)?.label;
 
   return (
-    <div className="max-w-[1170px] px-5 py-6 mx-auto">
+    <div className="max-w-[1170px] px-5 py-6 mx-auto dark:bg-gray-900">
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 mb-4 text-xs text-gray-400">
         <Link to="/" className="no-underline hover:text-orange-500">
@@ -243,14 +245,20 @@ export default function CatalogPage() {
           Товары для {category === "cats" ? "кошек" : "животных"}
         </Link>
         <span>›</span>
-        <span className="text-gray-600">{categoryTitle}</span>
+        <span className="text-gray-600 dark:text-gray-400">
+          {categoryTitle}
+        </span>
       </div>
 
-      <h1 className="mb-5 text-2xl font-bold text-gray-900">{categoryTitle}</h1>
+      <h1 className="mb-5 text-2xl font-bold text-gray-900 dark:text-white">
+        {categoryTitle}
+      </h1>
 
       {/* Top filters bar */}
       <div className="flex flex-wrap items-center gap-2 mb-3">
-        <span className="text-xs text-gray-400">Часто ищут:</span>
+        <span className="text-xs text-gray-400 dark:text-gray-500">
+          Часто ищут:
+        </span>
 
         {quickFiltersList.map((f) => (
           <button
@@ -262,7 +270,7 @@ export default function CatalogPage() {
             className={`h-7 px-3 text-xs rounded border cursor-pointer transition-colors ${
               quickActive === f
                 ? "border-orange-400 bg-orange-50 text-orange-500"
-                : "border-gray-200 text-gray-600 hover:border-orange-300 bg-white"
+                : "border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-orange-300 bg-white dark:bg-gray-800"
             }`}
           >
             {f}
@@ -273,13 +281,13 @@ export default function CatalogPage() {
         <div className="relative ml-auto">
           <button
             onClick={() => setSortOpen(!sortOpen)}
-            className="flex items-center gap-2 px-3 text-sm text-gray-600 transition-colors bg-white border border-gray-200 rounded cursor-pointer h-9 hover:border-orange-400"
+            className="flex items-center gap-2 px-3 text-sm text-gray-600 dark:text-gray-300 transition-colors bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded cursor-pointer h-9 hover:border-orange-400"
           >
             {currentSortLabel}
             <ChevronDown size={14} />
           </button>
           {sortOpen && (
-            <div className="absolute right-0 top-10 z-30 bg-white border border-gray-200 rounded-lg shadow-lg min-w-[180px]">
+            <div className="absolute right-0 top-10 z-30 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg min-w-[180px]">
               {sortOptions.map((opt) => (
                 <button
                   key={opt.value}
@@ -346,7 +354,7 @@ export default function CatalogPage() {
                   if (priceFromInput) setPriceFrom(priceFromInput);
                 }}
                 placeholder="От"
-                className="w-20 px-2 text-sm transition-colors border border-gray-200 rounded outline-none h-9 focus:border-orange-400"
+                className="w-20 px-2 text-sm transition-colors bg-white dark:bg-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded outline-none h-9 focus:border-orange-400"
               />
               <input
                 value={priceToInput}
@@ -355,7 +363,7 @@ export default function CatalogPage() {
                   if (priceToInput) setPriceTo(priceToInput);
                 }}
                 placeholder="До"
-                className="w-20 px-2 text-sm transition-colors border border-gray-200 rounded outline-none h-9 focus:border-orange-400"
+                className="w-20 px-2 text-sm transition-colors bg-white dark:bg-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded outline-none h-9 focus:border-orange-400"
               />
             </div>
           </div>

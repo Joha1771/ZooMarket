@@ -17,12 +17,12 @@ export default function ProductCard({ product, className }) {
     <Link
       to={`/product/${product.id}`}
       className={cn(
-        "group bg-white border border-gray-200 flex flex-col p-3 no-underline hover:shadow-lg hover:border-orange-200 transition-all duration-200",
+        "group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex flex-col p-3 no-underline hover:shadow-lg hover:border-orange-200 dark:hover:border-orange-700 transition-all duration-200",
         className,
       )}
     >
       {/* Image */}
-      <div className="relative bg-white flex items-center justify-center min-h-[140px] overflow-hidden">
+      <div className="relative bg-white dark:bg-gray-800 flex items-center justify-center min-h-[140px] overflow-hidden">
         {product.discount > 0 && (
           <span className="absolute top-0 left-0 bg-red-500 text-white text-[11px] font-bold px-1.5 py-0.5 z-10">
             –{product.discount}%
@@ -57,7 +57,7 @@ export default function ProductCard({ product, className }) {
       </div>
 
       {/* Name */}
-      <p className="flex-1 text-[12px] leading-snug text-gray-700 line-clamp-3 min-h-[48px] mt-2 group-hover:text-gray-900 transition-colors duration-200">
+      <p className="flex-1 text-[12px] leading-snug text-gray-700 dark:text-gray-300 line-clamp-3 min-h-[48px] mt-2 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-200">
         {product.name}
       </p>
 
@@ -68,7 +68,7 @@ export default function ProductCard({ product, className }) {
             e.preventDefault();
             e.stopPropagation();
           }}
-          className="px-2 py-1 mt-2 text-xs text-gray-600 bg-white border border-gray-200 rounded outline-none cursor-pointer hover:border-orange-400 focus:border-orange-400 transition-colors duration-150"
+          className="px-2 py-1 mt-2 text-xs text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded outline-none cursor-pointer hover:border-orange-400 focus:border-orange-400 transition-colors duration-150"
         >
           {product.weights.map((w) => (
             <option key={w}>{w}</option>

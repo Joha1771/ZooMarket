@@ -13,14 +13,19 @@ export default function HitsSection() {
 
   if (loading) {
     return (
-      <section className="py-8">
+      <section className="py-8 dark:bg-gray-900">
         <div className="max-w-[1170px] mx-auto px-5">
           <div className="flex items-center justify-between mb-5">
-            <h2 className="text-xl font-bold text-gray-900">Хиты продаж</h2>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+              Хиты продаж
+            </h2>
           </div>
           <div className="grid grid-cols-5">
             {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="h-64 bg-gray-100 animate-pulse" />
+              <div
+                key={i}
+                className="h-64 bg-gray-100 dark:bg-gray-800 animate-pulse"
+              />
             ))}
           </div>
         </div>
@@ -29,11 +34,13 @@ export default function HitsSection() {
   }
 
   return (
-    <section className="py-8">
+    <section className="py-8 dark:bg-gray-900">
       <div className="max-w-[1170px] mx-auto px-5">
         {/* Header */}
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-xl font-bold text-gray-900">Хиты продаж</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+            Хиты продаж
+          </h2>
         </div>
 
         {/* Swiper */}

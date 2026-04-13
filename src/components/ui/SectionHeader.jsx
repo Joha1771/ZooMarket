@@ -4,7 +4,9 @@ import cardsRightArrow from "../../assets/icons/cards-right arrow.svg";
 export default function SectionHeader({ title, to }) {
   return (
     <div className="flex items-center justify-between mb-5">
-      <h2 className="text-xl font-bold text-gray-900">{title}</h2>
+      <h2 className="text-xl font-bold text-gray-900 dark:text-white dark:text-white">
+        {title}
+      </h2>
       {to && (
         <Link
           to={to}

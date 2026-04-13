@@ -1,11 +1,14 @@
 export default function SeoText() {
   return (
-    <section className="py-8 bg-white" id="seo">
+    <section
+      className="py-8 bg-white dark:bg-gray-900 transition-colors"
+      id="seo"
+    >
       <div className="max-w-[1170px] mx-auto px-5">
-        <h2 className="mb-3 text-base font-bold text-gray-800">
+        <h2 className="mb-3 text-base font-bold text-gray-800 dark:text-gray-200">
           Интернет-зоомагазин "Сытая Морда" в г. Тюмень
         </h2>
-        <div className="max-w-4xl space-y-2 text-sm leading-relaxed text-gray-500">
+        <div className="max-w-4xl space-y-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
           <p>
             Для владельца красивых и веселых домашних животных нет ничего более
             приятного, чем порадовать своего питомца. Вкусные угощения, полезные
@@ -23,10 +26,10 @@ export default function SeoText() {
           </p>
         </div>
 
-        <h3 className="mt-6 mb-3 text-base font-bold text-gray-800">
+        <h3 className="mt-6 mb-3 text-base font-bold text-gray-800 dark:text-gray-200">
           Что можно купить в интернет-магазине зоотоваров.
         </h3>
-        <div className="max-w-4xl space-y-2 text-sm leading-relaxed text-gray-500">
+        <div className="max-w-4xl space-y-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
           <p>
             В каталоге представлены самые разные типы кормов для ваших питомцев.
             Выбирайте добавки и витамины в корм для любимцев и поддерживайте их
@@ -63,10 +66,10 @@ export default function SeoText() {
           </p>
         </div>
 
-        <h3 className="mt-6 mb-3 text-base font-bold text-gray-800">
+        <h3 className="mt-6 mb-3 text-base font-bold text-gray-800 dark:text-gray-200">
           Как кпить товары для питомцев в интернете
         </h3>
-        <div className="max-w-4xl text-sm leading-relaxed text-gray-500">
+        <div className="max-w-4xl text-sm leading-relaxed text-gray-500 dark:text-gray-400">
           <p>
             Воспользуйтесь бесплатными консультациями, чтобы заказать подходящие
             зоотовары в Тюмени. В магазине «Сытая Морда» есть всё, что

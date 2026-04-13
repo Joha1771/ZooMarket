@@ -48,7 +48,7 @@ export default function ProductPage() {
   };
 
   return (
-    <div className="max-w-[1170px] px-5 py-6 mx-auto">
+    <div className="max-w-[1170px] px-5 py-6 mx-auto dark:bg-gray-900">
       {/* Breadcrumb */}
       <div className="flex flex-wrap items-center gap-2 mb-6 text-xs text-gray-400">
         <Link to="/" className="no-underline hover:text-orange-500">
@@ -83,8 +83,10 @@ export default function ProductPage() {
 
         {/* Middle: Info */}
         <div className="flex-1">
-          <p className="mb-1 text-xs text-gray-400">Код товара: {product.id}</p>
-          <h1 className="mb-4 text-xl font-bold leading-snug text-gray-900">
+          <p className="mb-1 text-xs text-gray-400 dark:text-gray-500">
+            Код товара: {product.id}
+          </p>
+          <h1 className="mb-4 text-xl font-bold leading-snug text-gray-900 dark:text-white">
             {product.name}
           </h1>
 
@@ -117,10 +119,12 @@ export default function ProductPage() {
               .filter(([, v]) => v)
               .map(([k, v]) => (
                 <div key={k} className="flex gap-4">
-                  <span className="flex-shrink-0 w-32 pb-1 text-gray-400 border-b border-gray-200 border-dotted">
+                  <span className="flex-shrink-0 w-32 pb-1 text-gray-400 dark:text-gray-500 border-b border-gray-200 dark:border-gray-700 border-dotted">
                     {k}
                   </span>
-                  <span className="pb-1 text-gray-700">{v}</span>
+                  <span className="pb-1 text-gray-700 dark:text-gray-300">
+                    {v}
+                  </span>
                 </div>
               ))}
           </div>
@@ -204,7 +208,7 @@ export default function ProductPage() {
           ))}
         </div>
         {activeTab === "description" ? (
-          <p className="max-w-2xl text-sm leading-relaxed text-gray-600">
+          <p className="max-w-2xl text-sm leading-relaxed text-gray-600 dark:text-gray-400">
             {product.description}
           </p>
         ) : (
@@ -218,10 +222,14 @@ export default function ProductPage() {
               .map(([k, v]) => (
                 <div
                   key={k}
-                  className="flex justify-between pb-2 border-b border-gray-100"
+                  className="flex justify-between pb-2 border-b border-gray-100 dark:border-gray-700"
                 >
-                  <span className="text-sm text-gray-400">{k}</span>
-                  <span className="text-sm font-medium text-gray-700">{v}</span>
+                  <span className="text-sm text-gray-400 dark:text-gray-500">
+                    {k}
+                  </span>
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    {v}
+                  </span>
                 </div>
               ))}
           </div>

@@ -19,13 +19,15 @@ const schema = z.object({
 });
 
 const inputCls =
-  "h-11 px-4 border border-gray-200 rounded-lg text-sm text-gray-700 outline-none focus:border-orange-400 transition-colors bg-white w-full";
+  "h-11 px-4 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-700 dark:text-gray-200 outline-none focus:border-orange-400 transition-colors bg-white dark:bg-gray-800 w-full";
 
 function Field({ label, error, optional, children }) {
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center justify-between">
-        <label className="text-xs text-gray-500">{label}</label>
+        <label className="text-xs text-gray-500 dark:text-gray-400">
+          {label}
+        </label>
         {optional && (
           <span className="text-xs text-orange-500">необязательное</span>
         )}
@@ -70,7 +72,7 @@ export default function CheckoutPage() {
         <span className="text-gray-600">Оформление заказа</span>
       </div>
 
-      <h1 className="mb-8 text-2xl font-bold text-gray-900">
+      <h1 className="mb-8 text-2xl font-bold text-gray-900 dark:text-white">
         Оформление заказа
       </h1>
 
@@ -80,7 +82,7 @@ export default function CheckoutPage() {
           <div className="flex flex-col flex-1 gap-6">
             {/* Buyer */}
             <div>
-              <h2 className="mb-5 text-base font-bold text-gray-900">
+              <h2 className="mb-5 text-base font-bold text-gray-900 dark:text-white">
                 Покупатель
               </h2>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -117,7 +119,7 @@ export default function CheckoutPage() {
 
             {/* Address */}
             <div>
-              <h2 className="mb-5 text-base font-bold text-gray-900">
+              <h2 className="mb-5 text-base font-bold text-gray-900 dark:text-white">
                 Адрес доставки
               </h2>
               <div className="flex flex-col gap-4">
@@ -143,7 +145,7 @@ export default function CheckoutPage() {
           <div className="flex flex-col w-full gap-6 lg:w-96">
             {/* Delivery */}
             <div>
-              <h2 className="mb-4 text-base font-bold text-gray-900">
+              <h2 className="mb-4 text-base font-bold text-gray-900 dark:text-white">
                 Способ доставки
               </h2>
               <div className="flex flex-col gap-4">
@@ -176,7 +178,7 @@ export default function CheckoutPage() {
                       className="mt-0.5 cursor-pointer accent-orange-500"
                     />
                     <div>
-                      <p className="text-sm font-medium text-gray-800 transition-colors group-hover:text-orange-500">
+                      <p className="text-sm font-medium text-gray-800 dark:text-gray-200 transition-colors group-hover:text-orange-500">
                         {opt.label}
                         {opt.hint && (
                           <span
@@ -187,7 +189,7 @@ export default function CheckoutPage() {
                           </span>
                         )}
                       </p>
-                      <p className="text-xs leading-snug text-gray-400">
+                      <p className="text-xs leading-snug text-gray-400 dark:text-gray-500">
                         {opt.sub}
                       </p>
                     </div>
@@ -198,7 +200,7 @@ export default function CheckoutPage() {
 
             {/* Payment */}
             <div>
-              <h2 className="mb-3 text-base font-bold text-gray-900">
+              <h2 className="mb-3 text-base font-bold text-gray-900 dark:text-white">
                 Способ оплаты
               </h2>
               <p className="text-sm text-gray-600">
@@ -208,14 +210,14 @@ export default function CheckoutPage() {
 
             {/* Comment */}
             <div>
-              <h2 className="mb-3 text-base font-bold text-gray-900">
+              <h2 className="mb-3 text-base font-bold text-gray-900 dark:text-white">
                 Комментарий к заказу
               </h2>
               <textarea
                 {...register("comment")}
                 placeholder="Ваш комментарий"
                 rows={5}
-                className="w-full px-4 py-3 text-sm text-gray-700 transition-colors bg-white border border-gray-200 rounded-lg outline-none resize-none focus:border-orange-400"
+                className="w-full px-4 py-3 text-sm text-gray-700 dark:text-gray-200 transition-colors bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg outline-none resize-none focus:border-orange-400"
               />
             </div>
           </div>
@@ -223,7 +225,7 @@ export default function CheckoutPage() {
 
         {/* Bottom bar */}
         <div className="flex flex-col items-center justify-between gap-4 pt-6 mt-6 border-t border-gray-200 sm:flex-row">
-          <p className="text-lg font-bold text-gray-900">
+          <p className="text-lg font-bold text-gray-900 dark:text-white">
             Сумма заказа: {totalPrice.toLocaleString()} Р
           </p>
           <div className="flex items-center gap-4">
@@ -233,14 +235,11 @@ export default function CheckoutPage() {
                 {...register("agree")}
                 className="w-4 h-4 cursor-pointer accent-orange-500"
               />
-              <span className="text-sm text-gray-500">
+              <span className="text-sm text-gray-500 dark:text-gray-400">
                 Я прочитал и согласен с{" "}
-                <Link
-                  to="/terms"
-                  className="text-orange-500 no-underline hover:underline"
-                >
+                <span className="text-orange-500 cursor-default">
                   Условиями соглашения
-                </Link>
+                </span>
               </span>
             </label>
             {errors.agree && (

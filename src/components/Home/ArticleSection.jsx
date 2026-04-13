@@ -30,10 +30,7 @@ const articles = [
 
 function ArticleCard({ article }) {
   return (
-    <Link
-      to={`/articles/${article.slug}`}
-      className="flex flex-col no-underline border border-gray-200 group hover:border-orange-200 hover:shadow-md transition-all duration-200"
-    >
+    <div className="flex flex-col border border-gray-200 dark:border-gray-700 group hover:border-orange-200 hover:shadow-md transition-all duration-200 cursor-pointer">
       <div className="overflow-hidden">
         <img
           src={article.image}
@@ -42,12 +39,14 @@ function ArticleCard({ article }) {
         />
       </div>
       <div className="flex flex-col gap-2 p-4">
-        <p className="text-xs text-gray-400">{article.date}</p>
-        <h3 className="text-sm font-medium leading-snug text-gray-800 transition-colors duration-150 group-hover:text-orange-500">
+        <p className="text-xs text-gray-400 dark:text-gray-500">
+          {article.date}
+        </p>
+        <h3 className="text-sm font-medium leading-snug text-gray-800 dark:text-gray-200 transition-colors duration-150 group-hover:text-orange-500">
           {article.title}
         </h3>
       </div>
-    </Link>
+    </div>
   );
 }
 
@@ -55,7 +54,7 @@ export default function ArticlesSection() {
   return (
     <section className="py-8" id="article">
       <div className="max-w-[1170px] mx-auto px-5">
-        <SectionHeader title="Интересные статьи" to="/articles" />
+        <SectionHeader title="Интересные статьи" />
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {articles.map((a) => (
             <ArticleCard key={a.id} article={a} />

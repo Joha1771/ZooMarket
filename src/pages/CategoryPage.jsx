@@ -39,7 +39,7 @@ function SubCategoryCard({ item, categorySlug }) {
   return (
     <Link
       to={`/catalog/${categorySlug}?sub=${item.id}`}
-      className="flex flex-col items-center justify-center gap-3 p-6 no-underline transition-all border-b border-r border-gray-200 hover:shadow-sm group"
+      className="flex flex-col items-center justify-center gap-3 p-6 no-underline transition-all border-b border-r border-gray-200 dark:border-gray-700 hover:shadow-sm group dark:bg-gray-900"
     >
       <div className="flex items-center justify-center w-16 h-16 transition-transform group-hover:scale-110">
         <img
@@ -48,7 +48,7 @@ function SubCategoryCard({ item, categorySlug }) {
           className="object-contain w-12 h-12"
         />
       </div>
-      <span className="text-sm leading-snug text-center text-gray-700 transition-colors group-hover:text-orange-500">
+      <span className="text-sm leading-snug text-center text-gray-700 dark:text-gray-300 transition-colors group-hover:text-orange-500">
         {item.label}
       </span>
     </Link>
@@ -62,9 +62,9 @@ export default function CategoryPage() {
   const currentCategory = sidebarCategories.find((c) => c.slug === slug);
 
   return (
-    <div className="max-w-[1170px] px-5 py-6 mx-auto">
+    <div className="max-w-[1170px] px-5 py-6 mx-auto dark:bg-gray-900">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 mb-6 text-xs text-gray-400">
+      <div className="flex items-center gap-2 mb-6 text-xs text-gray-400 dark:text-gray-500">
         <Link to="/" className="no-underline hover:text-orange-500">
           Главная
         </Link>
@@ -75,7 +75,7 @@ export default function CategoryPage() {
       </div>
 
       {/* Title */}
-      <h1 className="mb-6 text-2xl font-bold text-gray-900">
+      <h1 className="mb-6 text-2xl font-bold text-gray-900 dark:text-white">
         Товары для {currentCategory?.label?.toLowerCase() ?? slug}
       </h1>
 

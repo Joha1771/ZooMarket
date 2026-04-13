@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import vkSvg from "../../assets/icons/vk.svg";
 import fbSvg from "../../assets/icons/fb.svg";
 import instagramSvg from "../../assets/icons/instagram.svg";
@@ -21,13 +20,16 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer id="footer" className="mt-12 bg-white border-t border-gray-100">
+    <footer
+      id="footer"
+      className="mt-12 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 transition-colors duration-200"
+    >
       {/* Email subscription + socials */}
-      <div className="border-b border-gray-100">
+      <div className="border-b border-gray-100 dark:border-gray-800">
         <div className="max-w-[1170px] mx-auto px-4 md:px-5 py-5 md:py-6">
           {/* Десктоп: всё в ряд */}
           <div className="hidden md:flex items-center gap-6">
-            <p className="text-sm text-gray-600 whitespace-nowrap">
+            <p className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">
               Узнавайте о новых скидках
               <br />и спецпредложениях:
             </p>
@@ -35,7 +37,7 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="Ваш E-mail"
-                className="flex-1 h-10 px-4 text-sm border border-gray-200 rounded-l-lg outline-none focus:border-orange-400"
+                className="flex-1 h-10 px-4 text-sm border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 rounded-l-lg outline-none focus:border-orange-400"
               />
               <button className="h-10 px-5 text-sm text-white bg-gray-400 border-none rounded-r-lg cursor-pointer hover:bg-orange-500 whitespace-nowrap">
                 Подписаться
@@ -44,19 +46,19 @@ export default function Footer() {
             <div className="flex gap-3 ml-auto">
               <a
                 href="#"
-                className="flex items-center justify-center border border-gray-200 rounded-full w-9 h-9 hover:border-orange-400"
+                className="flex items-center justify-center border border-gray-200 dark:border-gray-700 rounded-full w-9 h-9 hover:border-orange-400"
               >
                 <img src={vkSvg} alt="ВКонтакте" className="w-full h-full" />
               </a>
               <a
                 href="#"
-                className="flex items-center justify-center border border-gray-200 rounded-full w-9 h-9 hover:border-orange-400"
+                className="flex items-center justify-center border border-gray-200 dark:border-gray-700 rounded-full w-9 h-9 hover:border-orange-400"
               >
                 <img src={fbSvg} alt="Facebook" className="w-full h-full" />
               </a>
               <a
                 href="#"
-                className="flex items-center justify-center border border-gray-200 rounded-full w-9 h-9 hover:border-orange-400"
+                className="flex items-center justify-center border border-gray-200 dark:border-gray-700 rounded-full w-9 h-9 hover:border-orange-400"
               >
                 <img
                   src={instagramSvg}
@@ -69,35 +71,35 @@ export default function Footer() {
 
           {/* Мобилка: стопкой */}
           <div className="md:hidden flex flex-col gap-4">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 dark:text-gray-300">
               Узнавайте о новых скидках и спецпредложениях:
             </p>
             <div className="flex">
               <input
                 type="email"
                 placeholder="Ваш E-mail"
-                className="flex-1 h-11 px-4 text-sm border border-gray-200 rounded-l-lg outline-none focus:border-orange-400"
+                className="flex-1 h-11 px-4 text-sm border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 rounded-l-lg outline-none focus:border-orange-400"
               />
-              <button className="h-11 px-4 text-sm text-white bg-gray-400 border-none rounded-r-lg cursor-pointer hover:bg-orange-500 whitespace-nowrap">
+              <button className="h-11 px-4 text-sm text-white bg-gray-400 dark:bg-gray-600 border-none rounded-r-lg cursor-pointer hover:bg-orange-500 whitespace-nowrap">
                 Подписаться
               </button>
             </div>
             <div className="flex gap-3">
               <a
                 href="#"
-                className="flex items-center justify-center border border-gray-200 rounded-full w-10 h-10 hover:border-orange-400"
+                className="flex items-center justify-center border border-gray-200 dark:border-gray-700 rounded-full w-10 h-10 hover:border-orange-400"
               >
                 <img src={vkSvg} alt="ВКонтакте" className="w-full h-full" />
               </a>
               <a
                 href="#"
-                className="flex items-center justify-center border border-gray-200 rounded-full w-10 h-10 hover:border-orange-400"
+                className="flex items-center justify-center border border-gray-200 dark:border-gray-700 rounded-full w-10 h-10 hover:border-orange-400"
               >
                 <img src={fbSvg} alt="Facebook" className="w-full h-full" />
               </a>
               <a
                 href="#"
-                className="flex items-center justify-center border border-gray-200 rounded-full w-10 h-10 hover:border-orange-400"
+                className="flex items-center justify-center border border-gray-200 dark:border-gray-700 rounded-full w-10 h-10 hover:border-orange-400"
               >
                 <img
                   src={instagramSvg}
@@ -111,31 +113,29 @@ export default function Footer() {
       </div>
 
       {/* Links */}
-      <div className="border-b border-gray-100">
+      <div className="border-b border-gray-100 dark:border-gray-800">
         <div className="max-w-[1170px] mx-auto px-4 md:px-5 py-4">
           {/* Мобилка: сетка 2 колонки */}
           <div className="grid grid-cols-2 gap-x-4 gap-y-3 md:hidden">
             {footerLinks.map((l) => (
-              <Link
+              <span
                 key={l.to}
-                to={l.to}
-                className="text-sm text-gray-600 no-underline hover:text-orange-500"
+                className="text-sm text-gray-600 dark:text-gray-400 cursor-default"
               >
                 {l.label}
-              </Link>
+              </span>
             ))}
           </div>
 
           {/* Десктоп: flex wrap */}
           <div className="hidden md:flex flex-wrap gap-x-6 gap-y-2">
             {footerLinks.map((l) => (
-              <Link
+              <span
                 key={l.to}
-                to={l.to}
-                className="text-xs text-gray-500 no-underline hover:text-orange-500"
+                className="text-xs text-gray-500 dark:text-gray-400 cursor-default"
               >
                 {l.label}
-              </Link>
+              </span>
             ))}
           </div>
         </div>
@@ -143,16 +143,18 @@ export default function Footer() {
 
       {/* Bottom */}
       {/* Десктоп */}
-      <div className="hidden md:flex max-w-[1170px] mx-auto px-5 py-4 items-center justify-between">
+      <div className="hidden md:flex max-w-[1170px] mx-auto px-5 py-4 items-center justify-between dark:border-gray-800">
         <div>
-          <p className="text-xs text-gray-400">
+          <p className="text-xs text-gray-400 dark:text-gray-500">
             © 2015–2019 Интернет-магазин зоотоваров «Сытая Морда»
           </p>
           <p className="text-xs text-gray-400 mt-0.5">
             Стоимость товаров на сайте не является публичной офертой
           </p>
         </div>
-        <p className="text-xs text-gray-400">Условия соглашения</p>
+        <p className="text-xs text-gray-400 dark:text-gray-500">
+          Условия соглашения
+        </p>
         <a
           href="tel:+73452594945"
           className="flex items-center gap-2 text-sm font-medium text-orange-500 no-underline hover:text-orange-600"
@@ -176,7 +178,7 @@ export default function Footer() {
       </div>
 
       {/* Мобилка */}
-      <div className="md:hidden px-4 py-5 flex flex-col gap-3">
+      <div className="md:hidden px-4 py-5 flex flex-col gap-3 border-t border-gray-100 dark:border-gray-800">
         <div className="flex items-center justify-between">
           <a
             href="tel:+73452594945"
@@ -200,11 +202,13 @@ export default function Footer() {
             Заказать звонок
           </a>
         </div>
-        <p className="text-xs text-gray-400">Условия соглашения</p>
-        <p className="text-xs text-gray-400">
+        <p className="text-xs text-gray-400 dark:text-gray-500">
+          Условия соглашения
+        </p>
+        <p className="text-xs text-gray-400 dark:text-gray-500">
           © 2015–2019 Интернет-магазин зоотоваров «Сытая Морда»
         </p>
-        <p className="text-xs text-gray-400">
+        <p className="text-xs text-gray-400 dark:text-gray-500">
           Стоимость товаров на сайте не является публичной офертой
         </p>
       </div>

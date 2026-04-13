@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import clinicImage from "../../assets/clinic.png";
 import heroBtnArrow from "../../assets/icons/hero-btn-arrow.svg";
 
@@ -17,18 +16,13 @@ export default function VetClinicBanner() {
             <p className="mb-6 text-sm text-white/90">
               Скидка 50% на первый приём.
             </p>
-            <Link
-              to="/vetclinic"
-              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium no-underline bg-white rounded-lg hover:bg-orange-50 hover:shadow-md active:scale-95 transition-all duration-150"
+            <button
+              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium bg-white rounded-lg hover:bg-orange-50 hover:shadow-md active:scale-95 transition-all duration-150 border-none cursor-pointer"
               style={{ color: "#FE9015" }}
             >
               На сайт ветклиники
-              <img
-                src={heroBtnArrow}
-                alt=""
-                className="w-4 h-3 transition-transform duration-150 group-hover:translate-x-1"
-              />
-            </Link>
+              <img src={heroBtnArrow} alt="" className="w-4 h-3" />
+            </button>
           </div>
 
           <img

@@ -1,8 +1,6 @@
-import { Link } from "react-router-dom";
-
 export default function SuccessPage() {
   return (
-    <div className="max-w-[1170px] px-5 py-10 mx-auto">
+    <div className="max-w-[1170px] px-5 py-10 mx-auto dark:bg-gray-900">
       <div
         className="relative flex items-center justify-between py-16 overflow-hidden px-14 rounded-2xl"
         style={{
@@ -21,12 +19,9 @@ export default function SuccessPage() {
             <br />
             Кстати, у нас тут акции:
           </p>
-          <Link
-            to="/promo"
-            className="inline-flex items-center gap-2 py-3 text-sm font-medium text-white no-underline transition-colors border-2 border-white px-7 rounded-xl hover:bg-white hover:text-orange-500"
-          >
+          <button className="inline-flex items-center gap-2 py-3 text-sm font-medium text-white transition-colors border-2 border-white px-7 rounded-xl hover:bg-white hover:text-orange-500 bg-transparent cursor-pointer">
             Смотреть акции →
-          </Link>
+          </button>
         </div>
 
         {/* Cat emoji */}

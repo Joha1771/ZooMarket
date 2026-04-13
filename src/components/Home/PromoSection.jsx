@@ -14,11 +14,16 @@ export default function PromoSection() {
       <section className="py-8">
         <div className="max-w-[1170px] mx-auto px-5">
           <div className="flex items-center justify-between mb-5">
-            <h2 className="text-xl font-bold text-gray-900">Акции</h2>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+              Акции
+            </h2>
           </div>
           <div className="grid grid-cols-5">
             {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="h-64 bg-gray-100 animate-pulse" />
+              <div
+                key={i}
+                className="h-64 bg-gray-100 dark:bg-gray-800 animate-pulse"
+              />
             ))}
           </div>
         </div>
@@ -33,7 +38,9 @@ export default function PromoSection() {
       <div className="max-w-[1170px] mx-auto px-5">
         {/* Header */}
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-xl font-bold text-gray-900">Акции</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+            Акции
+          </h2>
           <Link
             to="/catalog/all"
             className="flex items-center gap-1.5 text-sm no-underline hover:opacity-80 transition-opacity"

@@ -27,18 +27,18 @@ export default function BrandsSection() {
           {brands.map((b) => (
             <div
               key={b.id}
-              className="flex items-center justify-center cursor-pointer border border-transparent hover:border-orange-300 hover:shadow-sm transition-all duration-200 p-4 rounded-lg bg-gray-50"
+              className="flex items-center justify-center cursor-pointer border border-transparent hover:border-orange-300 hover:shadow-sm transition-all duration-200 p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
             >
               <img
                 src={b.icon}
                 alt={b.name}
-                className="max-h-12 w-auto transition-transform duration-200 hover:scale-105"
+                className="max-h-12 w-auto transition-transform duration-200 hover:scale-105 dark:brightness-90"
               />
             </div>
           ))}
         </div>
 
-        {/* Десктоп: ряд как было */}
+        {/* Десктоп: ряд */}
         <div className="hidden md:flex items-stretch">
           {brands.map((b) => (
             <div
@@ -48,7 +48,7 @@ export default function BrandsSection() {
               <img
                 src={b.icon}
                 alt={b.name}
-                className="transition-transform duration-200 hover:scale-105"
+                className="transition-transform duration-200 hover:scale-105 dark:brightness-90"
               />
             </div>
           ))}

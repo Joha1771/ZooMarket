@@ -6,7 +6,7 @@ function CartItem({ item }) {
   const { removeItem, updateQuantity } = useCartStore();
 
   return (
-    <div className="flex items-start gap-4 py-5 border-b border-gray-100 last:border-b-0">
+    <div className="flex items-start gap-4 py-5 border-b border-gray-100 dark:border-gray-700 last:border-b-0">
       {/* Image */}
       <div className="relative flex-shrink-0">
         {item.discount > 0 && (
@@ -17,7 +17,7 @@ function CartItem({ item }) {
         <img
           src={item.image_url || item.image}
           alt={item.name}
-          className="object-contain w-16 h-16 rounded bg-gray-50"
+          className="object-contain w-16 h-16 rounded bg-gray-50 dark:bg-gray-700"
         />
       </div>
 
@@ -25,7 +25,7 @@ function CartItem({ item }) {
       <div className="flex-1 min-w-0">
         <Link
           to={`/product/${item.id}`}
-          className="text-sm leading-snug text-gray-800 no-underline transition-colors hover:text-orange-500 line-clamp-2"
+          className="text-sm leading-snug text-gray-800 dark:text-gray-200 no-underline transition-colors hover:text-orange-500 line-clamp-2"
         >
           {item.name}
         </Link>
@@ -61,7 +61,7 @@ function CartItem({ item }) {
         >
           −
         </button>
-        <span className="text-sm font-medium text-center text-gray-800 w-14">
+        <span className="text-sm font-medium text-center text-gray-800 dark:text-gray-200 w-14">
           {item.quantity} шт
         </span>
         <button
@@ -75,7 +75,7 @@ function CartItem({ item }) {
       {/* Price */}
       <div className="flex-shrink-0 w-24 text-right">
         <p
-          className={`text-base font-bold ${item.discount > 0 ? "text-red-500" : "text-gray-900"}`}
+          className={`text-base font-bold ${item.discount > 0 ? "text-red-500" : "text-gray-900 dark:text-white"}`}
         >
           {(item.price * item.quantity).toLocaleString()} Р
         </p>
@@ -98,10 +98,12 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
-      <div className="flex flex-col items-center max-w-[1170px] gap-5 px-5 py-20 mx-auto">
+      <div className="flex flex-col items-center max-w-[1170px] gap-5 px-5 py-20 mx-auto dark:bg-gray-900">
         <p className="text-5xl">🛒</p>
-        <h2 className="text-xl font-bold text-gray-800">Корзина пуста</h2>
-        <p className="text-sm text-gray-500">
+        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200">
+          Корзина пуста
+        </h2>
+        <p className="text-sm text-gray-500 dark:text-gray-400">
           Добавьте товары, чтобы оформить заказ
         </p>
         <Link
@@ -117,26 +119,28 @@ export default function CartPage() {
   return (
     <div className="max-w-[1170px] px-5 py-6 mx-auto">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 mb-6 text-xs text-gray-400">
+      <div className="flex items-center gap-2 mb-6 text-xs text-gray-400 dark:text-gray-500">
         <Link to="/" className="no-underline hover:text-orange-500">
           Главная
         </Link>
         <span>›</span>
-        <span className="text-gray-600">Корзина</span>
+        <span className="text-gray-600 dark:text-gray-400">Корзина</span>
       </div>
 
-      <h1 className="mb-6 text-2xl font-bold text-gray-900">Корзина</h1>
+      <h1 className="mb-6 text-2xl font-bold text-gray-900 dark:text-white">
+        Корзина
+      </h1>
 
       <div className="flex flex-col items-start gap-6 lg:flex-row">
         {/* Items list */}
-        <div className="flex-1 px-6 bg-white rounded-lg">
+        <div className="flex-1 px-6 bg-white dark:bg-gray-800 rounded-lg">
           {items.map((item) => (
             <CartItem key={item.key} item={item} />
           ))}
         </div>
 
         {/* Summary sidebar */}
-        <div className="sticky flex flex-col flex-shrink-0 w-full gap-4 p-6 bg-white rounded-lg lg:w-[280px] top-24">
+        <div className="sticky flex flex-col flex-shrink-0 w-full gap-4 p-6 bg-white dark:bg-gray-800 rounded-lg lg:w-[280px] top-24">
           <button
             onClick={() => navigate("/checkout")}
             className="w-full h-12 text-base font-medium text-white transition-all bg-orange-500 border-none rounded-lg cursor-pointer hover:bg-orange-600 active:scale-95"
@@ -145,7 +149,7 @@ export default function CartPage() {
           </button>
 
           <div className="flex flex-col gap-2 pt-2 text-sm">
-            <div className="flex justify-between text-gray-600">
+            <div className="flex justify-between text-gray-600 dark:text-gray-400">
               <span>
                 {totalItems}{" "}
                 {totalItems === 1
@@ -154,20 +158,24 @@ export default function CartPage() {
                     ? "товара"
                     : "товаров"}
               </span>
-              <span className="font-medium text-gray-900">
+              <span className="font-medium text-gray-900 dark:text-white">
                 {totalPrice.toLocaleString()} Р
               </span>
             </div>
-            <div className="flex justify-between text-gray-600">
+            <div className="flex justify-between text-gray-600 dark:text-gray-400">
               <span>Доставка курьером по Тюмени</span>
-              <span className="font-medium text-gray-900">0 Р</span>
+              <span className="font-medium text-gray-900 dark:text-white">
+                0 Р
+              </span>
             </div>
             <p className="text-xs text-gray-400">(бесплатно от 1500 рублей)</p>
           </div>
 
-          <div className="flex justify-between pt-3 border-t border-gray-100">
-            <span className="font-bold text-gray-900">Итого</span>
-            <span className="text-lg font-bold text-gray-900">
+          <div className="flex justify-between pt-3 border-t border-gray-100 dark:border-gray-700">
+            <span className="font-bold text-gray-900 dark:text-white">
+              Итого
+            </span>
+            <span className="text-lg font-bold text-gray-900 dark:text-white">
               {totalPrice.toLocaleString()} Р
             </span>
           </div>
