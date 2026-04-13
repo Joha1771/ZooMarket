@@ -19,9 +19,27 @@ const brands = [
 export default function BrandsSection() {
   return (
     <section className="py-8" id="brands">
-      <div className="max-w-[1170px] mx-auto px-5">
+      <div className="max-w-[1170px] mx-auto px-4 md:px-5">
         <SectionHeader title="Популярные бренды" />
-        <div className="flex items-stretch">
+
+        {/* Мобилка: сетка 3×2 */}
+        <div className="grid grid-cols-3 gap-3 md:hidden">
+          {brands.map((b) => (
+            <div
+              key={b.id}
+              className="flex items-center justify-center cursor-pointer border border-transparent hover:border-orange-300 hover:shadow-sm transition-all duration-200 p-4 rounded-lg bg-gray-50"
+            >
+              <img
+                src={b.icon}
+                alt={b.name}
+                className="max-h-12 w-auto transition-transform duration-200 hover:scale-105"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Десктоп: ряд как было */}
+        <div className="hidden md:flex items-stretch">
           {brands.map((b) => (
             <div
               key={b.id}
