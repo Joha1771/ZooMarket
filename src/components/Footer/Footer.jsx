@@ -1,149 +1,14 @@
-import vkSvg from "../../assets/icons/vk.svg";
-import fbSvg from "../../assets/icons/fb.svg";
-import instagramSvg from "../../assets/icons/instagram.svg";
 import phoneSvg from "../../assets/icons/phone.svg";
-import footerBlueSvg from "../../assets/icons/footer-blue.svg";
-
-const footerLinks = [
-  { label: "О нас", to: "/about" },
-  { label: "Доставка и оплата", to: "/delivery" },
-  { label: "Вопросы и ответы", to: "/faq" },
-  { label: "Отзывы", to: "/reviews" },
-  { label: "Франчайзинг", to: "/franchise" },
-  { label: "Для юрлиц", to: "/business" },
-  { label: "Бонусная программа", to: "/bonus" },
-  { label: "Контакты", to: "/contacts" },
-  { label: "Акции", to: "/promo" },
-  { label: "Статьи", to: "/articles" },
-  { label: "Ветклиника", to: "/vetclinic" },
-];
 
 export default function Footer() {
   return (
     <footer
       id="footer"
-      className="mt-12 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 transition-colors duration-200"
+      className="mt-4 md:mt-6 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 transition-colors duration-200"
     >
-      {/* Email subscription + socials */}
-      <div className="border-b border-gray-100 dark:border-gray-800">
-        <div className="max-w-[1170px] mx-auto px-4 md:px-5 py-5 md:py-6">
-          {/* Десктоп: всё в ряд */}
-          <div className="hidden md:flex items-center gap-6">
-            <p className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">
-              Узнавайте о новых скидках
-              <br />и спецпредложениях:
-            </p>
-            <div className="flex flex-1 max-w-sm">
-              <input
-                type="email"
-                placeholder="Ваш E-mail"
-                className="flex-1 h-10 px-4 text-sm border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 rounded-l-lg outline-none focus:border-orange-400"
-              />
-              <button className="h-10 px-5 text-sm text-white bg-gray-400 border-none rounded-r-lg cursor-pointer hover:bg-orange-500 whitespace-nowrap">
-                Подписаться
-              </button>
-            </div>
-            <div className="flex gap-3 ml-auto">
-              <a
-                href="#"
-                className="flex items-center justify-center border border-gray-200 dark:border-gray-700 rounded-full w-9 h-9 hover:border-orange-400"
-              >
-                <img src={vkSvg} alt="ВКонтакте" className="w-full h-full" />
-              </a>
-              <a
-                href="#"
-                className="flex items-center justify-center border border-gray-200 dark:border-gray-700 rounded-full w-9 h-9 hover:border-orange-400"
-              >
-                <img src={fbSvg} alt="Facebook" className="w-full h-full" />
-              </a>
-              <a
-                href="#"
-                className="flex items-center justify-center border border-gray-200 dark:border-gray-700 rounded-full w-9 h-9 hover:border-orange-400"
-              >
-                <img
-                  src={instagramSvg}
-                  alt="Instagram"
-                  className="w-6 h-full"
-                />
-              </a>
-            </div>
-          </div>
-
-          {/* Мобилка: стопкой */}
-          <div className="md:hidden flex flex-col gap-4">
-            <p className="text-sm text-gray-600 dark:text-gray-300">
-              Узнавайте о новых скидках и спецпредложениях:
-            </p>
-            <div className="flex">
-              <input
-                type="email"
-                placeholder="Ваш E-mail"
-                className="flex-1 h-11 px-4 text-sm border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 rounded-l-lg outline-none focus:border-orange-400"
-              />
-              <button className="h-11 px-4 text-sm text-white bg-gray-400 dark:bg-gray-600 border-none rounded-r-lg cursor-pointer hover:bg-orange-500 whitespace-nowrap">
-                Подписаться
-              </button>
-            </div>
-            <div className="flex gap-3">
-              <a
-                href="#"
-                className="flex items-center justify-center border border-gray-200 dark:border-gray-700 rounded-full w-10 h-10 hover:border-orange-400"
-              >
-                <img src={vkSvg} alt="ВКонтакте" className="w-full h-full" />
-              </a>
-              <a
-                href="#"
-                className="flex items-center justify-center border border-gray-200 dark:border-gray-700 rounded-full w-10 h-10 hover:border-orange-400"
-              >
-                <img src={fbSvg} alt="Facebook" className="w-full h-full" />
-              </a>
-              <a
-                href="#"
-                className="flex items-center justify-center border border-gray-200 dark:border-gray-700 rounded-full w-10 h-10 hover:border-orange-400"
-              >
-                <img
-                  src={instagramSvg}
-                  alt="Instagram"
-                  className="w-7 h-full"
-                />
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Links */}
-      <div className="border-b border-gray-100 dark:border-gray-800">
-        <div className="max-w-[1170px] mx-auto px-4 md:px-5 py-4">
-          {/* Мобилка: сетка 2 колонки */}
-          <div className="grid grid-cols-2 gap-x-4 gap-y-3 md:hidden">
-            {footerLinks.map((l) => (
-              <span
-                key={l.to}
-                className="text-sm text-gray-600 dark:text-gray-400 cursor-default"
-              >
-                {l.label}
-              </span>
-            ))}
-          </div>
-
-          {/* Десктоп: flex wrap */}
-          <div className="hidden md:flex flex-wrap gap-x-6 gap-y-2">
-            {footerLinks.map((l) => (
-              <span
-                key={l.to}
-                className="text-xs text-gray-500 dark:text-gray-400 cursor-default"
-              >
-                {l.label}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-
       {/* Bottom */}
       {/* Десктоп */}
-      <div className="hidden md:flex max-w-[1170px] mx-auto px-5 py-4 items-center justify-between dark:border-gray-800">
+      <div className="hidden md:flex max-w-292.5 mx-auto px-5 py-4 items-center justify-between dark:border-gray-800">
         <div>
           <p className="text-xs text-gray-400 dark:text-gray-500">
             © 2015–2019 Интернет-магазин зоотоваров «Сытая Морда»
@@ -169,12 +34,6 @@ export default function Footer() {
           />
           +7 (3452) 59-49-45
         </a>
-        <a
-          href="#"
-          className="text-xs font-medium text-orange-500 no-underline hover:underline"
-        >
-          Заказать звонок
-        </a>
       </div>
 
       {/* Мобилка */}
@@ -195,12 +54,6 @@ export default function Footer() {
             />
             +7 (3452) 59-49-45
           </a>
-          <a
-            href="#"
-            className="text-sm font-medium text-orange-500 no-underline hover:underline"
-          >
-            Заказать звонок
-          </a>
         </div>
         <p className="text-xs text-gray-400 dark:text-gray-500">
           Условия соглашения
@@ -211,17 +64,6 @@ export default function Footer() {
         <p className="text-xs text-gray-400 dark:text-gray-500">
           Стоимость товаров на сайте не является публичной офертой
         </p>
-      </div>
-
-      {/* Blue chat button */}
-      <div className="fixed z-50 bottom-6 right-6">
-        <button className="flex items-center justify-center w-12 h-12 bg-blue-500 border-none rounded-full shadow-lg cursor-pointer hover:bg-blue-600">
-          <img
-            src={footerBlueSvg}
-            alt="Чат"
-            className="w-6 h-6 brightness-0 invert"
-          />
-        </button>
       </div>
     </footer>
   );

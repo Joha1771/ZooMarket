@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
@@ -14,6 +15,7 @@ const slides = [
     title: "Лохматость сильно повысится!",
     subtitle: "Скидка 20% на все шампуни для котеек.",
     btnText: "Смотреть шампуни",
+    to: "/catalog/cats",
     image: catImage,
   },
   {
@@ -21,6 +23,7 @@ const slides = [
     title: "Всё для вашего питомца",
     subtitle: "Корма, игрушки, аксессуары с доставкой по городу.",
     btnText: "Перейти в каталог",
+    to: "/catalog/all",
     image: catImage,
   },
 ];
@@ -38,12 +41,12 @@ export default function Hero() {
             nextEl: ".hero-next",
           }}
           loop
-          className="overflow-visible rounded-2xl"
+          className="overflow-hidden rounded-2xl"
         >
           {slides.map((slide) => (
             <SwiperSlide key={slide.id}>
               <div
-                className="relative flex items-center min-h-[340px] overflow-visible"
+                className="relative flex items-center min-h-[340px] overflow-hidden"
                 style={{ backgroundColor: "#F5A623" }}
               >
                 {/* Текст слева */}
@@ -54,24 +57,22 @@ export default function Hero() {
                   <p className="text-[15px] leading-relaxed text-white/90">
                     {slide.subtitle}
                   </p>
-                  <button
-                    className="flex items-center gap-2 px-5 py-3 mt-3 text-sm font-medium transition-colors bg-white border-none rounded-lg cursor-pointer hover:bg-gray-50"
+                  <Link
+                    to={slide.to}
+                    className="flex items-center gap-2 px-5 py-3 mt-3 text-sm font-medium transition-colors bg-white border-none rounded-lg cursor-pointer hover:bg-gray-50 no-underline"
                     style={{ color: "#FE9015" }}
                   >
                     {slide.btnText}
                     <img src={heroBtnArrow} alt="" className="w-4 h-3" />
-                  </button>
+                  </Link>
                 </div>
 
-                {/* Кот — выпирает сверху */}
-                <div
-                  className="absolute bottom-0 right-12"
-                  style={{ height: "115%", top: "-15%" }}
-                >
+                {/* Кот внутри контейнера */}
+                <div className="absolute right-12 bottom-0 h-full w-[40%] pointer-events-none select-none flex items-end justify-end">
                   <img
                     src={slide.image}
                     alt="Питомец"
-                    className="w-full h-full"
+                    className="w-full h-[92%] object-contain object-bottom"
                   />
                 </div>
               </div>

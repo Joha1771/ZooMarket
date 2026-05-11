@@ -21,7 +21,6 @@ const mainCategories = [
 ];
 
 const topLinks = [
-  { label: "О нас", section: "seo" },
   { label: "Компании", section: "brands" },
   { label: "Статьи", section: "article" },
   { label: "Контакты", section: "footer" },

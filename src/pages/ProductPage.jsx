@@ -129,7 +129,7 @@ export default function ProductPage() {
               ))}
           </div>
           <Link
-            to="#"
+            to="/catalog/all"
             className="inline-block mt-2 text-xs text-orange-500 hover:underline"
           >
             Смотреть все
@@ -183,7 +183,10 @@ export default function ProductPage() {
               <Truck size={13} />
               Бесплатная доставка по Тюмени при заказе от 1490р.
             </div>
-            <Link to="#" className="text-xs text-orange-500 hover:underline">
+            <Link
+              to="/?section=delivery"
+              className="text-xs text-orange-500 hover:underline"
+            >
               Узнать все условия доставки
             </Link>
           </div>

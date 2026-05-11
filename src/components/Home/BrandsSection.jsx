@@ -5,7 +5,6 @@ import brands3 from "../../assets/icons/brands3.svg";
 import brands4 from "../../assets/icons/brands4.svg";
 import brands5 from "../../assets/icons/brands5.svg";
 import brands6 from "../../assets/icons/brands6.svg";
-import cardsRightArrow from "../../assets/icons/cards-right arrow.svg";
 
 const brands = [
   { id: 1, icon: brands1, name: "Fresh Step" },
@@ -39,7 +38,7 @@ export default function BrandsSection() {
         </div>
 
         {/* Десктоп: ряд */}
-        <div className="hidden md:flex items-stretch">
+        <div className="hidden md:flex items-stretch gap-3">
           {brands.map((b) => (
             <div
               key={b.id}
@@ -52,11 +51,6 @@ export default function BrandsSection() {
               />
             </div>
           ))}
-          <div className="flex items-center justify-center flex-shrink-0 ml-3">
-            <button className="p-0 bg-transparent border-none cursor-pointer hover:opacity-70 transition-opacity duration-150">
-              <img src={cardsRightArrow} alt="Ещё" className="w-10 h-10" />
-            </button>
-          </div>
         </div>
       </div>
     </section>
